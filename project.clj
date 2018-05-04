@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [cljfmt "0.5.7"]]
   :main cljfmt-graalvm.core
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+                       :aot :all}})
