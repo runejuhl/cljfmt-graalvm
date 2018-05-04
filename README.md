@@ -17,18 +17,21 @@ To build the binary yourself, here are some instructions.
 - Download [GraalVM](http://www.graalvm.org/downloads/) for your machine. You will need the EE version if you're using MacOS.
 - Set `JAVA_HOME` to the GraalVM home directory, e.g.
 
-
-    export JAVA_HOME=~/Downloads/graalvm-1.0.0-rc1/Contents/Home
+```
+export JAVA_HOME=~/Downloads/graalvm-1.0.0-rc1/Contents/Home
+```
     
 - Set the `PATH` to use GraalVM's binaries, e.g.
 
+```
+export PATH=$PATH:~/Downloads/graalvm-1.0.0-rc1/Contents/Home/bin
+```
 
-    export PATH=$PATH:~/Downloads/graalvm-1.0.0-rc1/Contents/Home/bin
-    
 - Create the uberjar:
 
-
-    lein uberjar
+```
+lein uberjar
+```
 
 - Finally, create the binary:
 
