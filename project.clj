@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [cljfmt "0.5.7"]]
+                 [cljfmt "0.6.0"]]
   :main cljfmt-graalvm.core
   :profiles {:uberjar {:jvm-opts ["-Dclojure.compiler.direct-linking=true"]
                        :aot :all}})
