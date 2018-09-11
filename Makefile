@@ -19,12 +19,17 @@ deb:
 	@dh_clean
 	mv ../$(NAME)* dist/
 
-.PHONY: docker
-docker: Dockerfile
-	docker build --build-arg GRAALVM_VERSION=$(GRAALVM_VERSION) -t $(USER)/graalvm-lein:$(GRAALVM_VERSION) -t $(USER)/graalvm-lein:latest .
-
 $(UBERJAR):
 	lein uberjar
 
 install:
 	install -m 755 ./cljfmt $(PREFIX)/bin/
+
+.PHONY: docker
+docker: Dockerfile
+	docker build --build-arg GRAALVM_VERSION=$(GRAALVM_VERSION) -t $(USER)/graalvm-lein:$(GRAALVM_VERSION) -t $(USER)/graalvm-lein:latest .
+
+.PHONY: docker/push
+docker/push: docker
+	docker push $(USER)/graalvm-lein:$(GRAALVM_VERSION)
+	docker push $(USER)/graalvm-lein:latest

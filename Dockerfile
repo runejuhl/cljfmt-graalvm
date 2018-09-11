@@ -10,6 +10,8 @@ RUN apt-get update && \
     apt-get -y install \
             curl \
             gcc \
+            git \
+            make \
             zlib1g-dev
 
 RUN ( cd /usr/local/bin && \
