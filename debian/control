@@ -1,0 +1,11 @@
+Source: cljfmt
+Priority: optional
+Maintainer: Rune Juhl Jacobsen <runejuhl@petardo.dk>
+Section: devel
+Homepage: https://petardo.dk/~runejuhl/
+Build-Depends: debhelper (>= 10), devscripts (>= 2.16)
+Standards-Version: 4.2.1.1
+
+Package: cljfmt
+Architecture: amd64
+Description: cljfmt built with Oracle GraalVM for almost instant startup

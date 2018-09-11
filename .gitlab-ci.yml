@@ -1,12 +1,28 @@
 stages:
-  - release
+  - build
+  - package
 
 build:
   image: runejuhl/graalvm-lein:latest
-  stage: release
+  stage: build
+  except:
+    - tags
   script:
-    - lein uberjar
-    - native-image -jar target/cljfmt-graalvm-standalone.jar -H:Name="cljfmt"
+    - make
   artifacts:
     paths:
       - ./cljfmt
+
+package:
+  image: runejuhl/graalvm-lein:latest
+  stage: package
+  only:
+    refs:
+      - master
+      - tags
+  script:
+    - make packages
+  artifacts:
+    paths:
+      - ./cljfmt
+      - ./dist/
