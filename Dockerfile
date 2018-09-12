@@ -9,6 +9,9 @@ WORKDIR /tmp
 RUN apt-get update && \
     apt-get -y install \
             curl \
+            build-essential \
+            debhelper \
+            devscripts \
             gcc \
             git \
             make \

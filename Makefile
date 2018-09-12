@@ -12,9 +12,11 @@ $(NAME): $(UBERJAR)
 .PHONY: packages
 packages: deb
 
-.PHONY: deb
-deb:
+dist:
 	@mkdir -p dist
+
+.PHONY: deb
+deb: dist
 	debuild -us -uc -b
 	@dh_clean
 	mv ../$(NAME)* dist/
@@ -33,3 +35,7 @@ docker: Dockerfile
 docker/push: docker
 	docker push $(USER)/graalvm-lein:$(GRAALVM_VERSION)
 	docker push $(USER)/graalvm-lein:latest
+
+.PHONY: clean
+clean:
+	rm -f dist/*
