@@ -1,1 +1,1 @@
-cljfmt usr/bin/
+./build/cljfmt usr/bin/
