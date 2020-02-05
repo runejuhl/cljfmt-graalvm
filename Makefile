@@ -46,3 +46,6 @@ deb: $(NATIVE_BIN)
 .PHONY: clean
 clean:
 	rm -rf ./$(TARGET_DIR)/*
+
+release:
+	gbp dch --auto --git-author --distribution=stable

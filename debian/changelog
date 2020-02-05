@@ -1,5 +1,15 @@
+cljfmt (0.7.0ubuntu1) stable; urgency=medium
+
+  * Remove documentation stub
+  * Allow passing source code on stdin, format multiple files
+  * Bump cljfmt dependency
+  * Use runejuhl/lein-graal image for building native binary
+  * More stuff
+
+ -- Rune Juhl Jacobsen <runejuhl@petardo.dk>  Wed, 05 Feb 2020 22:05:35 +0100
+
 cljfmt (0.7.0) stable; urgency=medium
 
   * Initial release.
 
- -- Rune Juhl Jacobsen <runejuhl@petardo.dk>  Wed, 12 Sep 2018 10:12:47   +0200
+ -- Rune Juhl Jacobsen <runejuhl@petardo.dk>  Wed, 05 Feb 2020 22:03:20 +0100
