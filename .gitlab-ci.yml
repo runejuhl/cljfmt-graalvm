@@ -3,23 +3,21 @@ stages:
   - package
 
 build:
-  image: runejuhl/graalvm-lein:latest
+  image: runejuhl/lein-graal:git-21.1.0
   stage: build
-  except:
-    - tags
   script:
-    - make
+    - make build
   artifacts:
     paths:
-      - ./cljfmt
+      - ./build/cljfmt
 
 package:
-  image: runejuhl/graalvm-lein:latest
+  image: runejuhl/groovy-generic-build
   stage: package
   only:
     refs:
       - master
-      - tags
+      - build
   script:
     - make packages
   artifacts:

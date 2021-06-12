@@ -1,6 +1,6 @@
 NAME = cljfmt
 VERSION ?= $(shell git describe --tags --always --dirty)
-DOCKER_IMAGE ?= runejuhl/lein-graal:v19.2.1
+DOCKER_IMAGE ?= runejuhl/lein-graal:21.1.0
 UBERJAR = target/cljfmt-graalvm-standalone.jar
 PREFIX ?= /usr/local
 TARGET_DIR ?= build
@@ -9,31 +9,27 @@ NATIVE_IMAGE_ARGS ?= --initialize-at-build-time --verbose --no-server
 
 export VERSION
 
+$(NATIVE_BIN): $(UBERJAR)
+	@mkdir -p $(TARGET_DIR)
+	native-image $(NATIVE_IMAGE_ARGS) -jar "$(UBERJAR)" -H:Name="$(NATIVE_BIN)"
+
 $(UBERJAR):
 	lein uberjar
 
-$(TARGET_DIR):
+.PHONY: build
+build: $(NATIVE_BIN)
 
-native: $(NATIVE_BIN)
-
-.PHONY: graal
-graal:
-	native-image $(NATIVE_IMAGE_ARGS) -jar "$(UBERJAR)" -H:Name="$(NATIVE_BIN)"
-
-$(NATIVE_BIN): $(UBERJAR)
+build/docker: $(UBERJAR)
 	@mkdir -p $(TARGET_DIR)
 	docker run -ti --rm \
 		-e HOME=/tmp \
 		-e VERSION=$(VERSION) \
 		-u $(shell id -u):$(shell id -g) \
-		-v $(shell pwd):/app:ro \
-		-v $(shell pwd)/$(TARGET_DIR):/app/$(TARGET_DIR):rw \
+		-v $(PWD):/app:ro \
+		-v $(PWD)/$(TARGET_DIR):/app/$(TARGET_DIR):rw \
 		-w /app \
 		$(DOCKER_IMAGE) \
-		make graal
-
-.PHONY: build
-build: $(NATIVE_BIN)
+		make build
 
 .PHONY: packages
 packages: deb
