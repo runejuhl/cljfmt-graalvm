@@ -11,3 +11,4 @@ pom.xml.asc
 .hg/
 /cljfmt
 /bin/
+/build/
